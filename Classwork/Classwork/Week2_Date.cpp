@@ -1,7 +1,7 @@
 #include "Week2_Date.h"
 namespace Week_2
 {
-	Week2_Date::Week2_Date(int year = 2025, int month = 1, int day = 1)
+	Week2_Date::Week2_Date(int year = 2025, int month, int day)
 	{
 		std::cout << "Parameterized  Constructor for Week2_Date Called!!\n";
 
@@ -41,14 +41,13 @@ namespace Week_2
 
 	void Week2_Date::normalize()
 	{
-		int total_days = _day;
-		int actual_day = total_days % 30 == 0 ? 30 : total_days % 30;
+		int actual_day = _day % 30 == 0 ? 30 : _day % 30;
 
-		int total_months = _month;
-		int month_carry_over = total_days == 30 ? 0 : int(total_days / 30);
-		int actual_month = (total_months + month_carry_over) % 12 == 0 ? 12 : (total_months + month_carry_over) % 12;
+		int month_carry_over = _day == 30 ? 0 : int(_day / 30);
+		int total_months = _month + month_carry_over;
+		int actual_month = (total_months % 12 == 0) ? 12 : (total_months % 12);
 
-		int year_carry_over = (total_months + month_carry_over) == 12 ? 0 : int((total_months + month_carry_over) / 12);
+		int year_carry_over = (total_months == 12) ? 0 : int(total_months / 12);
 		int total_years = _year + year_carry_over;
 
 		// Boundary Checks

@@ -6,7 +6,7 @@ int main()
 	std::cout << "\n--------------------- Testing Date ---------------------";
 
 	std::cout << "\nCreating an anonymous object - 1\n";
-	std::cout << Week_2::Week2_Date(2025, 12, 1) << '\n';
+	std::cout << Week_2::Week2_Date(2025) << '\n';
 
 	std::cout << "\nCreating a named object - 2\n";
 	Week_2::Week2_Date d1(2020, 3, 28);

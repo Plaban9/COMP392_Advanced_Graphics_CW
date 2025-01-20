@@ -11,7 +11,7 @@ namespace Week_2
 
 	public:
 		Week2_Date();
-		Week2_Date(int year, int month, int day);
+		Week2_Date(int year, int month = 1, int day = 1);
 		~Week2_Date();
 		Week2_Date operator+ (Week2_Date const& date);
 		Week2_Date operator+ (int days);
