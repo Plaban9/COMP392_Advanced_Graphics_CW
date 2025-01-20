@@ -1,9 +1,9 @@
 #include "Week2_Date.h"
 namespace Week_2
 {
-	Week2_Date::Week2_Date(int year = 2025, int month, int day)
+	Week2_Date::Week2_Date(int year, int month, int day)
 	{
-		std::cout << "Parameterized  Constructor for Week2_Date Called!!\n";
+		std::cout << "Constructor for Week2_Date Called!!\n";
 
 		_year = year;
 		_month = month;
