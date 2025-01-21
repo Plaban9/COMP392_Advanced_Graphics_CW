@@ -3,7 +3,7 @@ namespace Week_2
 {
 	Week2_Date::Week2_Date(int year, int month, int day)
 	{
-		std::cout << "Constructor for Week2_Date Called!!\n";
+		std::cout << "Constructor for Week2_Date Called!!" << std::endl;
 
 		_year = year;
 		_month = month;
@@ -12,7 +12,7 @@ namespace Week_2
 
 	Week2_Date::Week2_Date()
 	{
-		std::cout << "Default Constructor for Week2_Date Called!!";
+		std::cout << "Default Constructor for Week2_Date Called!!" << std::endl;
 		_year = 2025;
 		_month = 1;
 		_day = 1;
@@ -55,9 +55,11 @@ namespace Week_2
 		_month = (actual_month < 1 || actual_month > 12) ? 1 : actual_month;
 		_day = (actual_day < 1 || actual_day > 30) ? 1 : actual_day;
 	}
+
+	std::ostream& Week_2::operator<<(std::ostream& os, const Week2_Date& date)
+	{
+		return os << date._year << "-" << date._month << "-" << date._day;
+	}
 }
 
-std::ostream& Week_2::operator<<(std::ostream& os, const Week2_Date& date)
-{
-	return os << date._year << "-" << date._month << "-" << date._day;
-}
+
