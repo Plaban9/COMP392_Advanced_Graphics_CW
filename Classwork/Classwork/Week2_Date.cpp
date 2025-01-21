@@ -20,7 +20,7 @@ namespace Week_2
 
 	Week2_Date::~Week2_Date()
 	{
-		std::cout << "Destructor for Week2_Date Called!!\n";
+		std::cout << "Destructor for Week2_Date Called!!" << std::endl;
 	}
 
 	Week2_Date Week2_Date::operator+(Week2_Date const& date)
