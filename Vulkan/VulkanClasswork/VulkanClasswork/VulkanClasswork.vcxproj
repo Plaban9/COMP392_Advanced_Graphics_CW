@@ -76,7 +76,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalIncludeDirectories>C:\Users\plaba\OneDrive\Email attachments\Documents\Visual Studio 2022\Libraries\glfw-3.4.bin.WIN64\include;C:\Users\plaba\OneDrive\Email attachments\Documents\Visual Studio 2022\Libraries\glm;D:\Softwares\Vulkan\Include;D:\Softwares\Vulkan\Lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -85,6 +85,15 @@
       <AdditionalLibraryDirectories>D:\Softwares\Vulkan\Lib;C:\Users\plaba\OneDrive\Email attachments\Documents\Visual Studio 2022\Libraries\glfw-3.4.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>$(ProjectDir)compileVulkan.bat
+xcopy "$(ProjectDir)Shaders\simple_shader.vert.spv" "$(TargetDir)Shaders\simple_shader.vert.spv"
+xcopy "$(ProjectDir)Shaders\simple_shader.frag.spv" "$(TargetDir)Shaders\simple_shader.frag.spv"</Command>
+    </PreBuildEvent>
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -94,7 +103,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalIncludeDirectories>C:\Users\plaba\OneDrive\Email attachments\Documents\Visual Studio 2022\Libraries\glfw-3.4.bin.WIN64\include;C:\Users\plaba\OneDrive\Email attachments\Documents\Visual Studio 2022\Libraries\glm;D:\Softwares\Vulkan\Include;D:\Softwares\Vulkan\Lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -105,6 +114,15 @@
       <AdditionalLibraryDirectories>D:\Softwares\Vulkan\Lib;C:\Users\plaba\OneDrive\Email attachments\Documents\Visual Studio 2022\Libraries\glfw-3.4.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>$(ProjectDir)compileVulkan.bat
+xcopy "$(ProjectDir)Shaders\simple_shader.vert.spv" "$(TargetDir)Shaders\simple_shader.vert.spv"
+xcopy "$(ProjectDir)Shaders\simple_shader.frag.spv" "$(TargetDir)Shaders\simple_shader.frag.spv"</Command>
+    </PreBuildEvent>
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -121,6 +139,15 @@
       <AdditionalLibraryDirectories>D:\Softwares\Vulkan\Lib;C:\Users\plaba\OneDrive\Email attachments\Documents\Visual Studio 2022\Libraries\glfw-3.4.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>$(ProjectDir)compileVulkan.bat
+xcopy "$(ProjectDir)Shaders\simple_shader.vert.spv" "$(TargetDir)Shaders\" /S /Y
+xcopy "$(ProjectDir)Shaders\simple_shader.frag.spv" "$(TargetDir)Shaders\" /S /Y</Command>
+    </PreBuildEvent>
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -130,7 +157,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalIncludeDirectories>C:\Users\plaba\OneDrive\Email attachments\Documents\Visual Studio 2022\Libraries\glfw-3.4.bin.WIN64\include;C:\Users\plaba\OneDrive\Email attachments\Documents\Visual Studio 2022\Libraries\glm;D:\Softwares\Vulkan\Include;D:\Softwares\Vulkan\Lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -141,15 +168,40 @@
       <AdditionalLibraryDirectories>D:\Softwares\Vulkan\Lib;C:\Users\plaba\OneDrive\Email attachments\Documents\Visual Studio 2022\Libraries\glfw-3.4.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>$(ProjectDir)compileVulkan.bat
+xcopy "$(ProjectDir)Shaders\simple_shader.vert.spv" "$(TargetDir)Shaders\simple_shader.vert.spv"
+xcopy "$(ProjectDir)Shaders\simple_shader.frag.spv" "$(TargetDir)Shaders\simple_shader.frag.spv"</Command>
+    </PreBuildEvent>
+    <PreLinkEvent>
+      <Command>
+      </Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="first_app.cpp" />
+    <ClCompile Include="lve_pipeline.cpp" />
     <ClCompile Include="lve_window.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="first_app.hpp" />
+    <ClInclude Include="lve_pipeline.hpp" />
     <ClInclude Include="lve_window.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\simple_shader.frag">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Shaders\simple_shader.vert">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

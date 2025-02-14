@@ -3,6 +3,7 @@
 // Manager of sorts.
 
 #include "lve_window.hpp"
+#include "lve_pipeline.hpp"
 
 namespace lve
 {
@@ -15,7 +16,8 @@ namespace lve
 		void run();
 
 	private:
-		LveWindow lveWindow{WIDTH, HEIGHT, "VULKAN CLASSWORK"};
+		LveWindow lveWindow{ WIDTH, HEIGHT, "VULKAN CLASSWORK" };
+		LvePipeline	lvePipeline{ "Shaders/simple_shader.vert.spv", "Shaders/simple_shader.frag.spv" };
 	};
 }
 

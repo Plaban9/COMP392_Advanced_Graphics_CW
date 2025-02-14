@@ -24,6 +24,9 @@
     <ClCompile Include="first_app.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="lve_pipeline.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lve_window.hpp">
@@ -32,5 +35,12 @@
     <ClInclude Include="first_app.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="lve_pipeline.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\simple_shader.frag" />
+    <None Include="Shaders\simple_shader.vert" />
   </ItemGroup>
 </Project>
