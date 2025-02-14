@@ -1,6 +1,5 @@
 #include "first_app.hpp"
 
-
 //STD
 #include <cstdlib>
 #include <iostream>
@@ -20,7 +19,6 @@ int main()
 
 		return EXIT_FAILURE;
 	}
-
 
 	return EXIT_SUCCESS;
 }

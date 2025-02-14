@@ -13,6 +13,13 @@ namespace lve
 		LveWindow(int w, int h, std::string name);
 		~LveWindow();
 
+		// Becasue of RAII (Resource creation happens when initialization and clean ups are performed here)
+		// Also, prevents two(multiple) pointers pointing to the same thing. Therefore, no dangling pointer at cleanup.
+		LveWindow(const LveWindow&) = delete; // Delete Copy Constructor
+		LveWindow& operator=(const LveWindow&) = delete; // Delete Copy Operator
+
+		bool shouldClose();
+
 	private:
 		void initWindow();
 

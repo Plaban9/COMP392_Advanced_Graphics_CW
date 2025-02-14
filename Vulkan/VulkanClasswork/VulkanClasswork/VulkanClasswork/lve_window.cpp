@@ -14,6 +14,11 @@ namespace lve
 		glfwTerminate();
 	}
 
+	bool LveWindow::shouldClose()
+	{
+		return glfwWindowShouldClose(window);
+	}
+
 	void LveWindow::initWindow()
 	{
 		// Initialize GLFW Library
