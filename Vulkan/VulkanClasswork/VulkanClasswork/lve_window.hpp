@@ -19,8 +19,9 @@ namespace lve
 		LveWindow& operator=(const LveWindow&) = delete; // Delete Copy Operator
 
 		bool shouldClose();
+		VkExtent2D getExtent();
 
-		void createWindowSurface(VkInstance instance, VkSurfaceKHR * surface);
+		void createWindowSurface(VkInstance instance, VkSurfaceKHR* surface);
 
 	private:
 		void initWindow();

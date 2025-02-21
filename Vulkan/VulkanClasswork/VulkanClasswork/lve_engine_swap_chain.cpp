@@ -406,8 +406,7 @@ namespace lve
 		return availableFormats[0];
 	}
 
-	VkPresentModeKHR LveEngineSwapChain::chooseSwapPresentMode(
-		const std::vector<VkPresentModeKHR>& availablePresentModes)
+	VkPresentModeKHR LveEngineSwapChain::chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes)
 	{
 		for (const auto& availablePresentMode : availablePresentModes)
 		{
