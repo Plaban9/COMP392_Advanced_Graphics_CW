@@ -177,7 +177,7 @@ namespace lve
 		if (vkCreateGraphicsPipelines(lveDevice.device(), VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS)
 		{
 			throw std::runtime_error("Failed to create graphics pipeline.");
-		 }
+		}
 	}
 
 	void LvePipeline::createShaderModule(const std::vector<char>& code, VkShaderModule* shaderModule)
@@ -189,7 +189,7 @@ namespace lve
 
 		if (vkCreateShaderModule(lveDevice.device(), &createInfo, nullptr, shaderModule) != VK_SUCCESS)
 		{
-			throw 	std::runtime_error("Failed to create shader module");
+			throw std::runtime_error("Failed to create shader module");
 		}
 	}
 }
