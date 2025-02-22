@@ -124,7 +124,6 @@ namespace lve
 		createShaderModule(fragCode, &fragShaderModule);
 
 		VkPipelineShaderStageCreateInfo shaderStages[2];
-
 		shaderStages[0].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
 		shaderStages[0].stage = VK_SHADER_STAGE_VERTEX_BIT;
 		shaderStages[0].module = vertShaderModule;
@@ -145,9 +144,8 @@ namespace lve
 		vertexInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
 		vertexInputInfo.vertexAttributeDescriptionCount = 0;
 		vertexInputInfo.vertexBindingDescriptionCount = 0;
-		vertexInputInfo.pVertexAttributeDescriptions = 0;
-		vertexInputInfo.pVertexBindingDescriptions = 0;
-
+		vertexInputInfo.pVertexAttributeDescriptions = nullptr;
+		vertexInputInfo.pVertexBindingDescriptions = nullptr;
 
 		VkPipelineViewportStateCreateInfo viewportInfo{};
 		viewportInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
@@ -178,13 +176,13 @@ namespace lve
 
 		if (vkCreateGraphicsPipelines(lveDevice.device(), VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS)
 		{
-			throw std::runtime_error("Failed to create graphics pipeline.");
+			throw std::runtime_error("failed to create graphics pipeline");
 		}
 	}
 
 	void LvePipeline::createShaderModule(const std::vector<char>& code, VkShaderModule* shaderModule)
 	{
-		VkShaderModuleCreateInfo createInfo;
+		VkShaderModuleCreateInfo createInfo{};
 		createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
 		createInfo.codeSize = code.size();
 		createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data());
@@ -194,4 +192,5 @@ namespace lve
 			throw std::runtime_error("Failed to create shader module");
 		}
 	}
+
 }
