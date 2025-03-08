@@ -148,6 +148,11 @@ xcopy "$(ProjectDir)Shaders\simple_shader.frag.spv" "$(TargetDir)Shaders\" /S /Y
       <Command>
       </Command>
     </PreLinkEvent>
+    <CustomBuildStep>
+      <Command>$(ProjectDir)compileVulkan.bat
+xcopy "$(ProjectDir)Shaders\simple_shader.vert.spv" "$(TargetDir)Shaders\" /S /Y
+xcopy "$(ProjectDir)Shaders\simple_shader.frag.spv" "$(TargetDir)Shaders\" /S /Y</Command>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -182,6 +187,7 @@ xcopy "$(ProjectDir)Shaders\simple_shader.frag.spv" "$(TargetDir)Shaders\simple_
     <ClCompile Include="first_app.cpp" />
     <ClCompile Include="lve_device.cpp" />
     <ClCompile Include="lve_engine_swap_chain.cpp" />
+    <ClCompile Include="lve_model.cpp" />
     <ClCompile Include="lve_pipeline.cpp" />
     <ClCompile Include="lve_window.cpp" />
     <ClCompile Include="main.cpp" />
@@ -190,6 +196,7 @@ xcopy "$(ProjectDir)Shaders\simple_shader.frag.spv" "$(TargetDir)Shaders\simple_
     <ClInclude Include="first_app.hpp" />
     <ClInclude Include="lve_device.hpp" />
     <ClInclude Include="lve_engine_swap_chain.hpp" />
+    <ClInclude Include="lve_model.hpp" />
     <ClInclude Include="lve_pipeline.hpp" />
     <ClInclude Include="lve_window.hpp" />
   </ItemGroup>

@@ -6,6 +6,7 @@
 #include "lve_device.hpp"
 #include "lve_engine_swap_chain.hpp"
 #include "lve_window.hpp"
+#include "lve_model.hpp"
 
 // STD
 #include<memory>
@@ -23,11 +24,12 @@ namespace lve
 		~FirstApp();
 
 		FirstApp(const FirstApp&) = delete;
-		FirstApp &operator=(const FirstApp &) = delete;
+		FirstApp& operator=(const FirstApp&) = delete;
 
 		void run();
 
 	private:
+		void loadModels();
 		void createPipelineLayout();
 		void createPipeline();
 		void createCommandBuffers();
@@ -41,7 +43,7 @@ namespace lve
 		std::unique_ptr<LvePipeline> lvePipeline;
 		VkPipelineLayout pipelineLayout;
 		std::vector<VkCommandBuffer> commandBuffers;
-
+		std::unique_ptr<LveModel> lveModel;
 	};
 }
 
