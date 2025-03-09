@@ -8,7 +8,6 @@
 
 namespace lve
 {
-
 	struct SwapChainSupportDetails
 	{
 		VkSurfaceCapabilitiesKHR capabilities;

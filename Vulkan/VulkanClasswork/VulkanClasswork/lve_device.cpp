@@ -119,7 +119,7 @@ namespace lve
 
 		if (vkCreateInstance(&createInfo, nullptr, &instance) != VK_SUCCESS)
 		{
-			throw std::runtime_error("failed to create instance!");
+			throw std::runtime_error("Failed to create instance!");
 		}
 
 		hasGflwRequiredInstanceExtensions();
@@ -131,7 +131,7 @@ namespace lve
 		vkEnumeratePhysicalDevices(instance, &deviceCount, nullptr);
 		if (deviceCount == 0)
 		{
-			throw std::runtime_error("failed to find GPUs with Vulkan support!");
+			throw std::runtime_error("Failed to find GPUs with Vulkan support!");
 		}
 		std::cout << "Device count: " << deviceCount << std::endl;
 		std::vector<VkPhysicalDevice> devices(deviceCount);
@@ -148,7 +148,7 @@ namespace lve
 
 		if (physicalDevice == VK_NULL_HANDLE)
 		{
-			throw std::runtime_error("failed to find a suitable GPU!");
+			throw std::runtime_error("Failed to find a suitable GPU!");
 		}
 
 		vkGetPhysicalDeviceProperties(physicalDevice, &properties);
@@ -219,7 +219,7 @@ namespace lve
 
 		if (vkCreateCommandPool(device_, &poolInfo, nullptr, &commandPool) != VK_SUCCESS)
 		{
-			throw std::runtime_error("failed to create command pool!");
+			throw std::runtime_error("Failed to create command pool!");
 		}
 	}
 

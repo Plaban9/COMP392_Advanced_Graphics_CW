@@ -83,11 +83,11 @@ namespace lve
 		for (int i = 0; i < commandBuffers.size(); i++)
 		{
 			VkCommandBufferBeginInfo beginInfo{};
-			beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO;
+			beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
 
 			if (vkBeginCommandBuffer(commandBuffers[i], &beginInfo) != VK_SUCCESS)
 			{
-				throw  std::runtime_error("Failed to begin recording command buffer!!");
+				throw std::runtime_error("Failed to begin recording command buffer!!");
 			}
 
 			VkRenderPassBeginInfo renderPassInfo{};

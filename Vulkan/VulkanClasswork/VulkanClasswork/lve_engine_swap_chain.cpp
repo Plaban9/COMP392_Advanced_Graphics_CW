@@ -109,7 +109,7 @@ namespace lve
 		if (vkQueueSubmit(device.graphicsQueue(), 1, &submitInfo, inFlightFences[currentFrame]) !=
 			VK_SUCCESS)
 		{
-			throw std::runtime_error("failed to submit draw command buffer!");
+			throw std::runtime_error("Failed to submit draw command buffer!");
 		}
 
 		VkPresentInfoKHR presentInfo = {};
@@ -183,7 +183,7 @@ namespace lve
 
 		if (vkCreateSwapchainKHR(device.device(), &createInfo, nullptr, &swapChain) != VK_SUCCESS)
 		{
-			throw std::runtime_error("failed to create swap chain!");
+			throw std::runtime_error("Failed to create swap chain!");
 		}
 
 		// we only specified a minimum number of images in the swap chain, so the implementation is
