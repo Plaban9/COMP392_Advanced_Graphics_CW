@@ -386,7 +386,7 @@ namespace lve
 				VK_SUCCESS ||
 				vkCreateFence(device.device(), &fenceInfo, nullptr, &inFlightFences[i]) != VK_SUCCESS)
 			{
-				throw std::runtime_error("failed to create synchronization objects for a frame!");
+				throw std::runtime_error("Failed to create synchronization objects for a frame!");
 			}
 		}
 	}
@@ -396,8 +396,8 @@ namespace lve
 	{
 		for (const auto& availableFormat : availableFormats)
 		{
-			if (availableFormat.format == VK_FORMAT_B8G8R8A8_UNORM &&
-				availableFormat.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)
+			// 	availableFormat.format == VK_FORMAT_B8G8R8A8_UNORM
+			if (availableFormat.format == VK_FORMAT_B8G8R8A8_SRGB && availableFormat.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)
 			{
 				return availableFormat;
 			}
