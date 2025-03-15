@@ -32,14 +32,18 @@ namespace lve
 		void loadModels();
 		void createPipelineLayout();
 		void createPipeline();
+		void recreateSwapChain();
 		void createCommandBuffers();
+		void freeCommandBuffers();
+		void recordCommandBuffer(int imageIndex);
 		void drawFrame();
 
 		LveWindow lveWindow{ WIDTH, HEIGHT, "VULKAN CLASSWORK" };
 		LveDevice lveDevice{ lveWindow };
 		//LvePipeline	lvePipeline{ lveDevice, "Shaders/simple_shader.vert.spv", "Shaders/simple_shader.frag.spv", LvePipeline::defaultPipelineConfigInfo(WIDTH, HEIGHT) };
 
-		LveEngineSwapChain lveSwapChain{ lveDevice, lveWindow.getExtent() };
+		//LveEngineSwapChain lveSwapChain{ lveDevice, lveWindow.getExtent() };
+		std::unique_ptr<LveEngineSwapChain> lveSwapChain;
 		std::unique_ptr<LvePipeline> lvePipeline;
 		VkPipelineLayout pipelineLayout;
 		std::vector<VkCommandBuffer> commandBuffers;

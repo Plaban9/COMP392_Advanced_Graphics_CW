@@ -15,12 +15,16 @@ namespace lve
 	LveEngineSwapChain::LveEngineSwapChain(LveDevice& deviceRef, VkExtent2D extent)
 		: device{ deviceRef }, windowExtent{ extent }
 	{
-		createSwapChain();
-		createImageViews();
-		createRenderPass();
-		createDepthResources();
-		createFramebuffers();
-		createSyncObjects();
+		init();
+	}
+
+	LveEngineSwapChain::LveEngineSwapChain(LveDevice& deviceRef, VkExtent2D extent, std::shared_ptr<LveEngineSwapChain> previous)
+		: device{ deviceRef }, windowExtent{ extent }, oldSwapChain{ previous }
+	{
+		init();
+
+		//clean up old swap chain since it's no longer needed
+		oldSwapChain = nullptr;
 	}
 
 	LveEngineSwapChain::~LveEngineSwapChain()
@@ -131,6 +135,16 @@ namespace lve
 		return result;
 	}
 
+	void LveEngineSwapChain::init()
+	{
+		createSwapChain();
+		createImageViews();
+		createRenderPass();
+		createDepthResources();
+		createFramebuffers();
+		createSyncObjects();
+	}
+
 	void LveEngineSwapChain::createSwapChain()
 	{
 		SwapChainSupportDetails swapChainSupport = device.getSwapChainSupport();
@@ -179,7 +193,7 @@ namespace lve
 		createInfo.presentMode = presentMode;
 		createInfo.clipped = VK_TRUE;
 
-		createInfo.oldSwapchain = VK_NULL_HANDLE;
+		createInfo.oldSwapchain = oldSwapChain == nullptr ? VK_NULL_HANDLE : oldSwapChain->swapChain;
 
 		if (vkCreateSwapchainKHR(device.device(), &createInfo, nullptr, &swapChain) != VK_SUCCESS)
 		{

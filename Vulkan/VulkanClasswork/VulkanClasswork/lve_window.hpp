@@ -20,14 +20,25 @@ namespace lve
 
 		bool shouldClose();
 		VkExtent2D getExtent();
+		bool wasWindowResized()
+		{
+			return framerBufferResized;
+		}
+
+		void resetWindowResizedFlag()
+		{
+			framerBufferResized = false;
+		}
 
 		void createWindowSurface(VkInstance instance, VkSurfaceKHR* surface);
 
 	private:
+		static void frameBufferResizeCallback(GLFWwindow *window, int width, int height);
 		void initWindow();
 
-		const int width;
-		const int height;
+		int width;
+		int height;
+		bool framerBufferResized = false;
 
 		std::string windowName;
 
