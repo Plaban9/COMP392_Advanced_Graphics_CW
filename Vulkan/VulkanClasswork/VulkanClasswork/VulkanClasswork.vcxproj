@@ -190,8 +190,10 @@ xcopy "$(ProjectDir)Shaders\simple_shader.frag.spv" "$(TargetDir)Shaders\simple_
     <ClCompile Include="lve_game_object.cpp" />
     <ClCompile Include="lve_model.cpp" />
     <ClCompile Include="lve_pipeline.cpp" />
+    <ClCompile Include="lve_renderer.cpp" />
     <ClCompile Include="lve_window.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="simple_render_system.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="first_app.hpp" />
@@ -200,7 +202,9 @@ xcopy "$(ProjectDir)Shaders\simple_shader.frag.spv" "$(TargetDir)Shaders\simple_
     <ClInclude Include="lve_game_object.hpp" />
     <ClInclude Include="lve_model.hpp" />
     <ClInclude Include="lve_pipeline.hpp" />
+    <ClInclude Include="lve_renderer.hpp" />
     <ClInclude Include="lve_window.hpp" />
+    <ClInclude Include="simple_render_system.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\simple_shader.frag">
