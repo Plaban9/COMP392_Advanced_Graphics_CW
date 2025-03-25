@@ -13,83 +13,84 @@
 
 namespace lve
 {
-	struct SimplePushConstantData
-	{
-		glm::mat2 transform{ 1.f };
-		glm::vec2 offset;
-		alignas(16) glm::vec3 color;
-	};
 
-	SimpleRenderSystem::SimpleRenderSystem(LveDevice& device, VkRenderPass renderPass) : lveDevice{ device }
-	{
-		createPipelineLayout();
-		createPipeline(renderPass);
-	}
+    struct SimplePushConstantData
+    {
+        glm::mat4 transform{ 1.f };
+        alignas(16) glm::vec3 color{};
+    };
 
-	SimpleRenderSystem::~SimpleRenderSystem()
-	{
-		vkDestroyPipelineLayout(lveDevice.device(), pipelineLayout, nullptr);
-	}
+    SimpleRenderSystem::SimpleRenderSystem(LveDevice& device, VkRenderPass renderPass)
+        : lveDevice{ device }
+    {
+        createPipelineLayout();
+        createPipeline(renderPass);
+    }
 
-	void SimpleRenderSystem::createPipelineLayout()
-	{
-		VkPushConstantRange pushConstantRange{};
-		pushConstantRange.stageFlags = VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT;
-		pushConstantRange.offset = 0;
-		pushConstantRange.size = sizeof(SimplePushConstantData);
+    SimpleRenderSystem::~SimpleRenderSystem()
+    {
+        vkDestroyPipelineLayout(lveDevice.device(), pipelineLayout, nullptr);
+    }
 
-		VkPipelineLayoutCreateInfo pipelineLayoutInfo{};
-		pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
-		pipelineLayoutInfo.setLayoutCount = 0;
-		pipelineLayoutInfo.pSetLayouts = nullptr;
-		pipelineLayoutInfo.pushConstantRangeCount = 1;
-		pipelineLayoutInfo.pPushConstantRanges = &pushConstantRange;
-		if (vkCreatePipelineLayout(lveDevice.device(), &pipelineLayoutInfo, nullptr, &pipelineLayout) !=
-			VK_SUCCESS)
-		{
-			throw std::runtime_error("failed to create pipeline layout!");
-		}
-	}
+    void SimpleRenderSystem::createPipelineLayout()
+    {
+        VkPushConstantRange pushConstantRange{};
+        pushConstantRange.stageFlags = VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT;
+        pushConstantRange.offset = 0;
+        pushConstantRange.size = sizeof(SimplePushConstantData);
 
-	void SimpleRenderSystem::createPipeline(VkRenderPass renderPass)
-	{
-		assert(pipelineLayout != nullptr && "Cannot create pipeline before pipeline layout");
+        VkPipelineLayoutCreateInfo pipelineLayoutInfo{};
+        pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+        pipelineLayoutInfo.setLayoutCount = 0;
+        pipelineLayoutInfo.pSetLayouts = nullptr;
+        pipelineLayoutInfo.pushConstantRangeCount = 1;
+        pipelineLayoutInfo.pPushConstantRanges = &pushConstantRange;
+        if (vkCreatePipelineLayout(lveDevice.device(), &pipelineLayoutInfo, nullptr, &pipelineLayout) !=
+            VK_SUCCESS)
+        {
+            throw std::runtime_error("failed to create pipeline layout!");
+        }
+    }
 
-		PipelineConfigInfo pipelineConfig{};
-		LvePipeline::defaultPipelineConfigInfo(pipelineConfig);
-		pipelineConfig.renderPass = renderPass;
-		pipelineConfig.pipelineLayout = pipelineLayout;
-		lvePipeline = std::make_unique<LvePipeline>(
-			lveDevice,
-			"shaders/simple_shader.vert.spv",
-			"shaders/simple_shader.frag.spv",
-			pipelineConfig);
-	}
+    void SimpleRenderSystem::createPipeline(VkRenderPass renderPass)
+    {
+        assert(pipelineLayout != nullptr && "Cannot create pipeline before pipeline layout");
 
-	void SimpleRenderSystem::renderGameObjects(
-		VkCommandBuffer commandBuffer, std::vector<LveGameObject>& gameObjects)
-	{
-		lvePipeline->bind(commandBuffer);
+        PipelineConfigInfo pipelineConfig{};
+        LvePipeline::defaultPipelineConfigInfo(pipelineConfig);
+        pipelineConfig.renderPass = renderPass;
+        pipelineConfig.pipelineLayout = pipelineLayout;
+        lvePipeline = std::make_unique<LvePipeline>(
+            lveDevice,
+            "shaders/simple_shader.vert.spv",
+            "shaders/simple_shader.frag.spv",
+            pipelineConfig);
+    }
 
-		for (auto& obj : gameObjects)
-		{
-			obj.transform2d.rotation = glm::mod(obj.transform2d.rotation + 0.01f, glm::two_pi<float>());
+    void SimpleRenderSystem::renderGameObjects(
+        VkCommandBuffer commandBuffer, std::vector<LveGameObject>& gameObjects)
+    {
+        lvePipeline->bind(commandBuffer);
 
-			SimplePushConstantData push{};
-			push.offset = obj.transform2d.translation;
-			push.color = obj.color;
-			push.transform = obj.transform2d.mat2();
+        for (auto& obj : gameObjects)
+        {
+            obj.transform.rotation.y = glm::mod(obj.transform.rotation.y + 0.01f, glm::two_pi<float>());
+            obj.transform.rotation.x = glm::mod(obj.transform.rotation.x + 0.005f, glm::two_pi<float>());
 
-			vkCmdPushConstants(
-				commandBuffer,
-				pipelineLayout,
-				VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
-				0,
-				sizeof(SimplePushConstantData),
-				&push);
-			obj.model->bind(commandBuffer);
-			obj.model->draw(commandBuffer);
-		}
-	}
+            SimplePushConstantData push{};
+            push.color = obj.color;
+            push.transform = obj.transform.mat4();
 
-}  // namespace lve
+            vkCmdPushConstants(
+                commandBuffer,
+                pipelineLayout,
+                VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
+                0,
+                sizeof(SimplePushConstantData),
+                &push);
+            obj.model->bind(commandBuffer);
+            obj.model->draw(commandBuffer);
+        }
+    }
+
+}  // namespace lve 
