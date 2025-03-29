@@ -30,10 +30,15 @@ namespace lve
 			framerBufferResized = false;
 		}
 
+		GLFWwindow* getGLFWwindow() const
+		{
+			return window;
+		}
+
 		void createWindowSurface(VkInstance instance, VkSurfaceKHR* surface);
 
 	private:
-		static void frameBufferResizeCallback(GLFWwindow *window, int width, int height);
+		static void frameBufferResizeCallback(GLFWwindow* window, int width, int height);
 		void initWindow();
 
 		int width;
