@@ -131,7 +131,7 @@ xcopy "$(ProjectDir)Shaders\simple_shader.frag.spv" "$(TargetDir)Shaders\simple_
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\plaba\OneDrive\Email attachments\Documents\Visual Studio 2022\Libraries\glfw-3.4.bin.WIN64\include;C:\Users\plaba\OneDrive\Email attachments\Documents\Visual Studio 2022\Libraries\glm;D:\Softwares\Vulkan\Include;D:\Softwares\Vulkan\Lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\plaba\OneDrive\Email attachments\Documents\Visual Studio 2022\Libraries\glfw-3.4.bin.WIN64\include;C:\Users\plaba\OneDrive\Email attachments\Documents\Visual Studio 2022\Libraries\glm;D:\Softwares\Vulkan\Include;D:\Softwares\Vulkan\Lib;"C:\Users\plaba\OneDrive\Email attachments\Documents\Visual Studio 2022\Libraries\tinyobjloader";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,16 +142,20 @@ xcopy "$(ProjectDir)Shaders\simple_shader.frag.spv" "$(TargetDir)Shaders\simple_
     <PreBuildEvent>
       <Command>$(ProjectDir)compileVulkan.bat
 xcopy "$(ProjectDir)Shaders\simple_shader.vert.spv" "$(TargetDir)Shaders\" /S /Y
-xcopy "$(ProjectDir)Shaders\simple_shader.frag.spv" "$(TargetDir)Shaders\" /S /Y</Command>
+xcopy "$(ProjectDir)Shaders\simple_shader.frag.spv" "$(TargetDir)Shaders\" /S /Y
+xcopy "$(ProjectDir)Models\" "$(TargetDir)Models\" /E</Command>
     </PreBuildEvent>
     <PreLinkEvent>
-      <Command>
-      </Command>
+      <Command>xcopy "$(ProjectDir)Models\" "$(TargetDir)Models\" /E
+xcopy "$(ProjectDir)Shaders\simple_shader.vert.spv" "$(TargetDir)Shaders\" /S /Y
+xcopy "$(ProjectDir)Shaders\simple_shader.frag.spv" "$(TargetDir)Shaders\" /S /Y
+$(ProjectDir)compileVulkan.bat</Command>
     </PreLinkEvent>
     <CustomBuildStep>
       <Command>$(ProjectDir)compileVulkan.bat
 xcopy "$(ProjectDir)Shaders\simple_shader.vert.spv" "$(TargetDir)Shaders\" /S /Y
-xcopy "$(ProjectDir)Shaders\simple_shader.frag.spv" "$(TargetDir)Shaders\" /S /Y</Command>
+xcopy "$(ProjectDir)Shaders\simple_shader.frag.spv" "$(TargetDir)Shaders\" /S /Y
+xcopy "$(ProjectDir)Models\" "$(TargetDir)Models\" /E</Command>
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -193,6 +197,7 @@ xcopy "$(ProjectDir)Shaders\simple_shader.frag.spv" "$(TargetDir)Shaders\simple_
     <ClCompile Include="lve_model.cpp" />
     <ClCompile Include="lve_pipeline.cpp" />
     <ClCompile Include="lve_renderer.cpp" />
+    <ClCompile Include="lve_utils.cpp" />
     <ClCompile Include="lve_window.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="simple_render_system.cpp" />
@@ -207,6 +212,7 @@ xcopy "$(ProjectDir)Shaders\simple_shader.frag.spv" "$(TargetDir)Shaders\simple_
     <ClInclude Include="lve_model.hpp" />
     <ClInclude Include="lve_pipeline.hpp" />
     <ClInclude Include="lve_renderer.hpp" />
+    <ClInclude Include="lve_utils.hpp" />
     <ClInclude Include="lve_window.hpp" />
     <ClInclude Include="simple_render_system.hpp" />
   </ItemGroup>
