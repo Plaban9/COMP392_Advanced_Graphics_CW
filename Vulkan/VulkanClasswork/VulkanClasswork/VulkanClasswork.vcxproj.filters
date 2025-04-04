@@ -97,4 +97,10 @@
     <None Include="Shaders\simple_shader.frag" />
     <None Include="Shaders\simple_shader.vert" />
   </ItemGroup>
+  <ItemGroup>
+    <Object Include="Models\colored_cube.obj" />
+    <Object Include="Models\cube.obj" />
+    <Object Include="Models\flat_vase.obj" />
+    <Object Include="Models\smooth_vase.obj" />
+  </ItemGroup>
 </Project>

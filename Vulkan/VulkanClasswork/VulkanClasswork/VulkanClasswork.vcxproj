@@ -230,6 +230,12 @@ xcopy "$(ProjectDir)Shaders\simple_shader.frag.spv" "$(TargetDir)Shaders\simple_
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Object Include="Models\colored_cube.obj" />
+    <Object Include="Models\cube.obj" />
+    <Object Include="Models\flat_vase.obj" />
+    <Object Include="Models\smooth_vase.obj" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
