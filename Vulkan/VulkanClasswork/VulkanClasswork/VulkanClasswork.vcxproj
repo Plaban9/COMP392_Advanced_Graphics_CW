@@ -192,6 +192,7 @@ xcopy "$(ProjectDir)Shaders\simple_shader.frag.spv" "$(TargetDir)Shaders\simple_
     <ClCompile Include="keyboard_movement_controller.cpp" />
     <ClCompile Include="lve_buffer.cpp" />
     <ClCompile Include="lve_camera.cpp" />
+    <ClCompile Include="lve_descriptors.cpp" />
     <ClCompile Include="lve_device.cpp" />
     <ClCompile Include="lve_engine_swap_chain.cpp" />
     <ClCompile Include="lve_frame_info.cpp" />
@@ -209,6 +210,7 @@ xcopy "$(ProjectDir)Shaders\simple_shader.frag.spv" "$(TargetDir)Shaders\simple_
     <ClInclude Include="keyboard_movement_controller.hpp" />
     <ClInclude Include="lve_buffer.hpp" />
     <ClInclude Include="lve_camera.hpp" />
+    <ClInclude Include="lve_descriptors.hpp" />
     <ClInclude Include="lve_device.hpp" />
     <ClInclude Include="lve_engine_swap_chain.hpp" />
     <ClInclude Include="lve_frame_info.hpp" />

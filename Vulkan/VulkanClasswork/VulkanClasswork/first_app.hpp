@@ -2,6 +2,7 @@
 // The purpose of this class is to control the application.
 // Manager of sorts.
 
+#include "lve_descriptors.hpp"
 #include "lve_device.hpp"
 #include "lve_window.hpp"
 #include "lve_game_object.hpp"
@@ -11,6 +12,7 @@
 // STD
 #include<memory>
 #include<vector>
+
 
 namespace lve
 {
@@ -34,7 +36,10 @@ namespace lve
 		LveWindow lveWindow{ WIDTH, HEIGHT, "VULKAN CLASSWORK" };
 		LveDevice lveDevice{ lveWindow };
 		LveRenderer lveRenderer{ lveWindow, lveDevice };
+
+		// note: order of declarations matter
+		std::unique_ptr<LveDescriptorPool> globalPool{};
 		std::vector<LveGameObject> gameObjects;
 	};
-}
+}// namespace lve
 
