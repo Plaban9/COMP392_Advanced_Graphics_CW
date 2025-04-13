@@ -1,7 +1,7 @@
 #include "first_app.hpp"
 #include "keyboard_movement_controller.hpp"
+#include "lve_buffer.hpp"
 #include "lve_camera.hpp"
-
 #include "simple_render_system.hpp"
 
 // libs
@@ -16,8 +16,14 @@
 #include <chrono>
 #include <stdexcept>
 
+
 namespace lve
 {
+	struct GlobalUbo
+	{
+		glm::mat4 projectionView{ 1.f };
+		glm::vec3 lightDirection = glm::normalize(glm::vec3{ 1.f, -3.f, -1.f });
+	};
 
 	FirstApp::FirstApp()
 	{
@@ -30,38 +36,45 @@ namespace lve
 
 	void FirstApp::run()
 	{
+		LveBuffer globalUboBuffer{ lveDevice,sizeof(GlobalUbo),LveEngineSwapChain::MAX_FRAMES_IN_FLIGHT,VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT,lveDevice.properties.limits.minUniformBufferOffsetAlignment, };
+		globalUboBuffer.map();
+
 		SimpleRenderSystem simpleRenderSystem{ lveDevice, lveRenderer.getSwapChainRenderPass() };
 		LveCamera camera{};
-
-
-		//camera.setViewDirection(glm::vec3(0.f), glm::vec3(0.5f, 0.f, 1.f));
-		//camera.setViewTarget(glm::vec3(-1.f, -2.f, -2.f), glm::vec3(0.f, 0.f, 2.5f));
 
 		auto viewerObject = LveGameObject::createGameObject();
 		KeyboardMovementController cameraController{};
 
 		auto currentTime = std::chrono::high_resolution_clock::now();
-
 		while (!lveWindow.shouldClose())
 		{
-			glfwPollEvents();  // May block
+			glfwPollEvents();
 
 			auto newTime = std::chrono::high_resolution_clock::now();
-			float frameTime = std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
+			float frameTime =
+				std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
 			currentTime = newTime;
 
 			cameraController.moveInPlaneXZ(lveWindow.getGLFWwindow(), frameTime, viewerObject);
 			camera.setViewYXZ(viewerObject.transform.translation, viewerObject.transform.rotation);
 
 			float aspect = lveRenderer.getAspectRatio();
-			
-			//camera.setOrthographicProjection(-aspect, aspect, -1, 1, -1, 1);
 			camera.setPerspectiveProjection(glm::radians(50.f), aspect, 0.1f, 10.f);
 
 			if (auto commandBuffer = lveRenderer.beginFrame())
 			{
+				int frameIndex = lveRenderer.getFrameIndex();
+				FrameInfo frameInfo{ frameIndex, frameTime, commandBuffer, camera };
+
+				// update
+				GlobalUbo ubo{};
+				ubo.projectionView = camera.getProjection() * camera.getView();
+				globalUboBuffer.writeToIndex(&ubo, frameIndex);
+				globalUboBuffer.flushIndex(frameIndex);
+
+				// render
 				lveRenderer.beginSwapChainRenderPass(commandBuffer);
-				simpleRenderSystem.renderGameObjects(commandBuffer, gameObjects, camera);
+				simpleRenderSystem.renderGameObjects(frameInfo, gameObjects);
 				lveRenderer.endSwapChainRenderPass(commandBuffer);
 				lveRenderer.endFrame();
 			}
@@ -70,7 +83,7 @@ namespace lve
 		vkDeviceWaitIdle(lveDevice.device());
 	}
 
-	
+
 
 	void FirstApp::loadGameObjects()
 	{
